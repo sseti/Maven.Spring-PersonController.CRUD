@@ -8,8 +8,4 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 
-    List<Person> findAll();
-    Person findById(Integer id);
-    Person save(Person p);
-    Person deleteById(Integer id);
 }

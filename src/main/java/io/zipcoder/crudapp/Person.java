@@ -10,22 +10,24 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     private String firstName;
     private String lastName;
 
-    public Person() {}
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Person(String first, String last, Integer id){
+        this.firstName=first;
+        this.lastName=last;
+        this.id=id;
     }
 
-    public Long getId() {
+    public Person(){}
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,7 +47,6 @@ public class Person {
         this.lastName = lastName;
     }
 }
-
 
 
 

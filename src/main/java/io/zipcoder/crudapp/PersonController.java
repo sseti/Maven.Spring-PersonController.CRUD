@@ -11,26 +11,31 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    PersonRepository personRepository;
+    private PersonService personService;
 
     @PostMapping("/people")
-    public Person createPerson(Person p){
-        return personRepository.save(p);
+    public ResponseEntity<Person> createPerson(@RequestBody Person p){
+        return new ResponseEntity<>(personService.createPerson(p), HttpStatus.CREATED);
     }
+
     @GetMapping("/people/{id}")
-    public Person getPerson(@PathVariable int id){
-        return personRepository.findById(id);
+    public ResponseEntity<Person> getPerson(@PathVariable int id){
+        return new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK);
     }
-    @GetMapping("/people")
-    public List<Person> getPersonList(){
-        return personRepository.findAll();
+
+    @GetMapping("/people/all")
+    public ResponseEntity<List<Person>> getPersonList(){
+        return new ResponseEntity<>((List<Person>) personService.getPersonList(),HttpStatus.OK);
     }
-    @PutMapping("/people/{id}")
-    public Person updatePerson(@PathVariable Person p, @PathVariable int id){
-        return personRepository.save(p);
-    }
+
     @DeleteMapping("/people/{id}")
-    public void deletePerson(@PathVariable int id){
-        personRepository.deleteById(id);
+    public void  deletePerson(@PathVariable int id){
+        personService.deletePerson(id);
     }
+
+    @PutMapping("/people/updateFn/{id}")
+    public ResponseEntity<Person> updateFirstName(@RequestParam  String firstName,@PathVariable Integer id){
+        return new ResponseEntity<>(personService.updatePersonFirstName(firstName, id), HttpStatus.CREATED);
+    }
+
 }
